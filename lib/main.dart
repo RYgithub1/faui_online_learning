@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'featured.dart';
+import 'header.dart';
+import 'heroin.dart';
+import 'trend_course.dart';
+
 
 void main(List<String> args) {runApp(MyApp());}
 
@@ -42,10 +47,10 @@ class _TopPageState extends State<TopPage> with SingleTickerProviderStateMixin {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                _Header(title: 'Terakoya'),
-                _Hero(),
-                _Featured(),
-                _TrendingCourses(),
+                Header(title: 'Terakoya'),
+                Heroin(),
+                Featured(),
+                TrendCourse(),
               ],
             ),
           ),
