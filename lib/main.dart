@@ -39,19 +39,79 @@ class TopPage extends StatefulWidget {
   _TopPageState createState() => _TopPageState();
 }
 class _TopPageState extends State<TopPage> with SingleTickerProviderStateMixin {
+  /// [---------- initial ----------]
+  AnimationController _controller;
+  Animation<Offset> _animation1;
+  Animation<Offset> _animation2;
+  Animation<Offset> _animation3;
+  Animation<Offset> _animation4;
+  /// [---------- initState() ----------]
+  @override
+  void initState() {
+    super.initState();   /// [先]
+    _controller = AnimationController(   /// [定義したinitialへ、initStateで初期値]
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    final tween = Tween<Offset>(
+      begin: Offset.zero,
+      end: Offset(-1.0, 0.0),
+    );
+    _animation1 = tween.animate(CurvedAnimation(   /// [アニメーションを区間1224で分ければよい]
+      parent: _controller,   /// [initial定義->initState()初期値を代入-> 済みの_controllerを基に -> animationを定義]
+      curve: Interval(0.0, 0.7, curve: Curves.easeInOutBack),   /// [同じeaseInOutBackを使いインターバルのみ変えて流れを作る]
+    ));
+    _animation2 = tween.animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(0.1, 0.8, curve: Curves.easeInOutBack),
+    ));
+    _animation3 = tween.animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(0.2, 0.9, curve: Curves.easeInOutBack),
+    ));
+    _animation4 = tween.animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(0.3, 1.0, curve: Curves.easeInOutBack),
+    ));
+  }
+  /// [---------- dispose() ----------]
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();   /// [後]
+  }
+
+
+  /// [---------- build() ----------]
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(   /// [body: SafeArea(上位) -> SingleChildScrollView .. wrap]
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal:16),
             child: Column(
               children: [
-                Header(title: 'Terakoya'),
-                Heroin(),
-                Featured(),
-                TrendCourse(),
+                // Header(title: 'Terakoya'),
+                // Heroin(),
+                // Featured(),
+                // TrendCourse(),
+                SlideTransition(   /// [SlideTransition()]
+                  position: _animation1,
+                  child: Header(title: 'Terakoya'),
+                ),
+                SlideTransition(   /// [SlideTransition()]
+                  position: _animation2,
+                  child: Heroin(),
+                ),
+                SlideTransition(   /// [SlideTransition()]
+                  position: _animation3,
+                  child: Featured(),
+                ),
+                SlideTransition(   /// [SlideTransition()]
+                  position: _animation4,
+                  child: TrendCourse(),
+                ),
               ],
             ),
           ),
@@ -60,10 +120,13 @@ class _TopPageState extends State<TopPage> with SingleTickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.library_add_check),
         onPressed: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(pageBuilder: (_, __, ___) => CoursePage()),
-          );
-        },
+          _controller.forward().then((_) {   /// [追加]アニメに合わせて動かすため
+            Navigator.of(context).push(
+              PageRouteBuilder(pageBuilder: (_, __, ___) => CoursePage()),
+            )
+            .then((_) => _controller.reverse());   /// [追加]アニメに合わせて動かすため
+          });
+        }
       ),
     );
   }

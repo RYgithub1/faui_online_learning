@@ -18,7 +18,7 @@ class Recommended extends StatelessWidget {
         _CourseCard(
           title: 'Figma',
           subtitle: 'Figma Mastery',
-          logoUrl: figmaLogoUrl,
+          logoUrl: figmaLogoUrl,   /// [pass arg]
         ),
         _CourseCard(
           title: 'Sketch',
@@ -67,7 +67,7 @@ class _CourseCard extends StatelessWidget{
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4),
         child: ListTile(
-          leading: Container(
+          leading: Container(   /// [leading]
             width: 48,
             height: 48,
             padding: EdgeInsets.all(4),
@@ -75,14 +75,14 @@ class _CourseCard extends StatelessWidget{
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.network(
+            child: Image.network(  /// [(child:格納)]
               logoUrl,
               fit: BoxFit.contain,
             ),
           ),
-          title: Text(title),
-          subtitle: Text(subtitle),
-          trailing: Icon(Icons.more_horiz),
+          title: Text(title),   /// [title]
+          subtitle: Text(subtitle),   /// [subtitle]
+          trailing: Icon(Icons.more_horiz),   /// [trailing]
         ),
       ),
     );
