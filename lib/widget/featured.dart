@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 
 
 class Featured extends StatelessWidget {
@@ -17,7 +17,7 @@ class Featured extends StatelessWidget {
           ),
         ),
         Stack(
-          children: [
+          children: <Widget>[
             Container(
               margin: EdgeInsets.only(top:20),
               child: _StackOnCard(),
@@ -43,7 +43,7 @@ class _StackOnCard extends StatelessWidget{
     return Card(
       color: Colors.yellow[200],
       elevation: 10,
-      shape: RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(  /// [shape: RoundedRectangleBorder]
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
@@ -81,7 +81,7 @@ class _LogoStackOn extends StatelessWidget{
   _LogoStackOn({Key key, @required this.size}):super(key:key);
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
+    return ClipOval(   /// [ClipOval()]
       child: Container(
         width: size,
         height: size,

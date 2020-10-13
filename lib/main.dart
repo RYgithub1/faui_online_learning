@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'featured.dart';
-import 'header.dart';
-import 'heroin.dart';
-import 'trend_course.dart';
+import 'widget/course_page.dart';
+import 'widget/featured.dart';
+import 'widget/header.dart';
+import 'widget/heroin.dart';
+import 'widget/trend_course.dart';
 
 
 void main(List<String> args) {runApp(MyApp());}
@@ -41,7 +42,7 @@ class _TopPageState extends State<TopPage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(   /// [body: SafeArea(上位)] -> SingleChildScrollViewをwrap
+      body: SafeArea(   /// [body: SafeArea(上位) -> SingleChildScrollView .. wrap]
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -57,8 +58,12 @@ class _TopPageState extends State<TopPage> with SingleTickerProviderStateMixin {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.list),
+        child: Icon(Icons.library_add_check),
+        onPressed: () {
+          Navigator.of(context).push(
+            PageRouteBuilder(pageBuilder: (_, __, ___) => CoursePage()),
+          );
+        },
       ),
     );
   }

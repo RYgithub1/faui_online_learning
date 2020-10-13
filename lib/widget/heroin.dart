@@ -7,7 +7,7 @@ class Heroin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 10,
-      shape: RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(  /// [shape: RoundedRectangleBorder]
         borderRadius: BorderRadius.circular(20),
       ),
       color: Colors.orange[100],
@@ -26,7 +26,7 @@ class Heroin extends StatelessWidget {
               FlatButton(
                 textColor: Colors.grey[900],
                 color: Colors.orange[300],
-                shape: RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(   /// [shape: RoundedRectangleBorder]
                   borderRadius: BorderRadius.circular(30),
                 ),
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 35),
